@@ -76,3 +76,20 @@ resource "azurerm_public_ip" "dev-ip" {
     environment = "dev"
   }
 }
+
+resource "azurerm_network_interface" "dev-nic" {
+  name                = "developer-nic"
+  location            = azurerm_resource_group.dev-rg.location
+  resource_group_name = azurerm_resource_group.dev-rg.name
+
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = azurerm_subnet.dev-subnet.id
+    private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.dev-ip.id
+  }
+
+  tags = {
+    environment = "dev"
+  }
+}
