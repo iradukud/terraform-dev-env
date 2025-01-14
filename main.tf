@@ -29,3 +29,10 @@ resource "azurerm_virtual_network" "dev-vnet" {
     environment = "dev"
   }
 }
+
+resource "azurerm_subnet" "dev-subnet" {
+  name                 = "developer-subnet"
+  resource_group_name  = azurerm_resource_group.dev-rg.name
+  virtual_network_name = azurerm_virtual_network.dev-vnet.name
+  address_prefixes     = ["10.0.1.0/24"]
+}
