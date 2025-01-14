@@ -60,3 +60,8 @@ resource "azurerm_network_security_rule" "dev-rule" {
   resource_group_name         = azurerm_resource_group.dev-rg.name
   network_security_group_name = azurerm_network_security_group.dev-nsg.name
 }
+
+resource "azurerm_subnet_network_security_group_association" "dev-sga" {
+  subnet_id                 = azurerm_subnet.dev-subnet.id
+  network_security_group_id = azurerm_network_security_group.dev-nsg.id
+}
