@@ -65,3 +65,14 @@ resource "azurerm_subnet_network_security_group_association" "dev-sga" {
   subnet_id                 = azurerm_subnet.dev-subnet.id
   network_security_group_id = azurerm_network_security_group.dev-nsg.id
 }
+
+resource "azurerm_public_ip" "dev-ip" {
+  name                = "dev-ip"
+  resource_group_name = azurerm_resource_group.dev-rg.name
+  location            = azurerm_resource_group.dev-rg.location
+  allocation_method   = "Dynamic"
+
+  tags = {
+    environment = "dev"
+  }
+}
