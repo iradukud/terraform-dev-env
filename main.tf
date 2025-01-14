@@ -129,7 +129,7 @@ resource "azurerm_linux_virtual_machine" "dev-vm" {
       user         = "adminuser",
       identityfile = "~/.ssh/devazurekey"
     })
-    interpreter = ["Powershell", "-Command"]
+    interpreter = var.host_os == "windows" ? ["Powershell", "-Command"] : ["bash", "-c"]
   }
 
   tags = {
