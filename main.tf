@@ -10,3 +10,11 @@ terraform {
 provider "azurerm" {
   features {}
 }
+
+resource "azurerm_resource_group" "dev-rg" {
+  name     = "developer-resources"
+  location = "East US"
+  tags = {
+    "environment" = "dev"
+  }
+}
